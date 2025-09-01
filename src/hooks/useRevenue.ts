@@ -2,52 +2,53 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-export interface Proposal {
+export interface RevenueTransaction {
   id: string;
   user_id: string;
+  project_id?: string;
   client_id?: string;
-  title: string;
+  amount: number;
+  type: string;
+  category?: string;
   description?: string;
-  budget_min?: number;
-  budget_max?: number;
-  status: string;
-  skills: string[];
-  submitted_at?: string;
-  response_deadline?: string;
-  win_probability?: number;
-  notes?: string;
+  date: string;
   created_at: string;
-  updated_at: string;
   clients?: {
     name: string;
     company?: string;
   };
+  projects?: {
+    title: string;
+  };
 }
 
-export const useProposals = () => {
-  const [proposals, setProposals] = useState<Proposal[]>([]);
+export const useRevenue = () => {
+  const [transactions, setTransactions] = useState<RevenueTransaction[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  const fetchProposals = async () => {
+  const fetchTransactions = async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from('proposals')
+        .from('revenue_transactions')
         .select(`
           *,
           clients (
             name,
             company
+          ),
+          projects (
+            title
           )
         `)
-        .order('created_at', { ascending: false });
+        .order('date', { ascending: false });
 
       if (error) throw error;
-      setProposals(data || []);
+      setTransactions(data || []);
     } catch (error: any) {
       toast({
-        title: "Error fetching proposals",
+        title: "Error fetching revenue transactions",
         description: error.message,
         variant: "destructive",
       });
@@ -56,25 +57,25 @@ export const useProposals = () => {
     }
   };
 
-  const createProposal = async (proposal: Omit<Proposal, 'id' | 'user_id' | 'created_at' | 'updated_at' | 'clients'>) => {
+  const createTransaction = async (transaction: Omit<RevenueTransaction, 'id' | 'user_id' | 'created_at' | 'clients' | 'projects'>) => {
     try {
       const { data, error } = await supabase
-        .from('proposals')
-        .insert([{ ...proposal, user_id: 'anonymous' } as any])
+        .from('revenue_transactions')
+        .insert([{ ...transaction, user_id: 'anonymous' } as any])
         .select()
         .single();
 
       if (error) throw error;
       
-      await fetchProposals();
+      await fetchTransactions();
       toast({
         title: "Success",
-        description: "Proposal created successfully",
+        description: "Transaction created successfully",
       });
       return data;
     } catch (error: any) {
       toast({
-        title: "Error creating proposal",
+        title: "Error creating transaction",
         description: error.message,
         variant: "destructive",
       });
@@ -82,23 +83,23 @@ export const useProposals = () => {
     }
   };
 
-  const updateProposal = async (id: string, updates: Partial<Omit<Proposal, 'clients' | 'id' | 'user_id' | 'created_at' | 'updated_at'>>) => {
+  const updateTransaction = async (id: string, updates: Partial<Omit<RevenueTransaction, 'clients' | 'projects' | 'id' | 'user_id' | 'created_at'>>) => {
     try {
       const { error } = await supabase
-        .from('proposals')
+        .from('revenue_transactions')
         .update(updates as any)
         .eq('id', id);
 
       if (error) throw error;
       
-      await fetchProposals();
+      await fetchTransactions();
       toast({
         title: "Success",
-        description: "Proposal updated successfully",
+        description: "Transaction updated successfully",
       });
     } catch (error: any) {
       toast({
-        title: "Error updating proposal",
+        title: "Error updating transaction",
         description: error.message,
         variant: "destructive",
       });
@@ -106,23 +107,23 @@ export const useProposals = () => {
     }
   };
 
-  const deleteProposal = async (id: string) => {
+  const deleteTransaction = async (id: string) => {
     try {
       const { error } = await supabase
-        .from('proposals')
+        .from('revenue_transactions')
         .delete()
         .eq('id', id);
 
       if (error) throw error;
       
-      await fetchProposals();
+      await fetchTransactions();
       toast({
         title: "Success",
-        description: "Proposal deleted successfully",
+        description: "Transaction deleted successfully",
       });
     } catch (error: any) {
       toast({
-        title: "Error deleting proposal",
+        title: "Error deleting transaction",
         description: error.message,
         variant: "destructive",
       });
@@ -131,15 +132,15 @@ export const useProposals = () => {
   };
 
   useEffect(() => {
-    fetchProposals();
+    fetchTransactions();
   }, []);
 
   return {
-    proposals,
+    transactions,
     loading,
-    createProposal,
-    updateProposal,
-    deleteProposal,
-    refetch: fetchProposals,
+    createTransaction,
+    updateTransaction,
+    deleteTransaction,
+    refetch: fetchTransactions,
   };
 };
