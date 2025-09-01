@@ -8,15 +8,15 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Professional CRM Design System */
-    --background: 248 250 252;
-    --foreground: 203 39% 15%;
+    /* Clean Professional Design System - All HSL */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 203 39% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 203 39% 15%;
+    --popover-foreground: 222 47% 11%;
 
     /* Professional Deep Blue Primary */
     --primary: 213 94% 33%;
@@ -24,69 +24,49 @@ All colors MUST be HSL.
     --primary-light: 213 94% 40%;
     --primary-dark: 213 94% 25%;
 
-    /* Professional Secondary */
-    --secondary: 210 15% 95%;
-    --secondary-foreground: 203 39% 15%;
+    /* Clean Secondary */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    /* Muted Backgrounds */
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 25% 45%;
+    /* Neutral Backgrounds */
+    --muted: 210 40% 98%;
+    --muted-foreground: 215 16% 47%;
 
-    /* Enterprise Accent */
-    --accent: 213 94% 96%;
-    --accent-foreground: 213 94% 33%;
+    /* Clean Accent */
+    --accent: 210 40% 98%;
+    --accent-foreground: 222 47% 11%;
 
-    /* Success - Emerald */
-    --success: 158 64% 40%;
+    /* Success - Clean Green */
+    --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
-    --success-light: 158 64% 95%;
+    --success-light: 142 76% 96%;
 
-    /* Warning - Amber */
-    --warning: 32 95% 44%;
+    /* Warning - Clean Orange */
+    --warning: 25 95% 53%;
     --warning-foreground: 0 0% 100%;
-    --warning-light: 32 95% 95%;
+    --warning-light: 25 95% 96%;
 
-    /* Destructive - Red */
+    /* Destructive - Clean Red */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders and Inputs */
+    /* Clean Borders */
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 213 94% 33%;
 
-    /* Professional Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(213 94% 33%), hsl(213 94% 40%));
-    --gradient-success: linear-gradient(135deg, hsl(158 64% 40%), hsl(158 64% 45%));
-    --gradient-analytics: linear-gradient(135deg, hsl(213 94% 33%), hsl(220 70% 50%));
-    --gradient-revenue: linear-gradient(135deg, hsl(158 64% 40%), hsl(142 70% 45%));
-    
-    /* Dashboard Shadows */
-    --shadow-card: 0 4px 6px -1px hsl(213 94% 33% / 0.1), 0 2px 4px -1px hsl(213 94% 33% / 0.06);
-    --shadow-elevated: 0 10px 15px -3px hsl(213 94% 33% / 0.1), 0 4px 6px -2px hsl(213 94% 33% / 0.05);
-    --shadow-analytics: 0 8px 25px -8px hsl(213 94% 33% / 0.25);
-
-    /* Enterprise Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s ease-out;
-
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Sidebar Variables */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 213 94% 33%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 98%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 213 94% 33%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
