@@ -14,7 +14,411 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      clients: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string | null
+          id: string
+          industry: string | null
+          last_project_date: string | null
+          location: string | null
+          name: string
+          notes: string | null
+          phone: string | null
+          projects_count: number | null
+          rating: number | null
+          status: string | null
+          total_spent: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          industry?: string | null
+          last_project_date?: string | null
+          location?: string | null
+          name: string
+          notes?: string | null
+          phone?: string | null
+          projects_count?: number | null
+          rating?: number | null
+          status?: string | null
+          total_spent?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          industry?: string | null
+          last_project_date?: string | null
+          location?: string | null
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          projects_count?: number | null
+          rating?: number | null
+          status?: string | null
+          total_spent?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      pipeline_deals: {
+        Row: {
+          client_id: string | null
+          created_at: string
+          days_in_stage: number | null
+          expected_close: string | null
+          id: string
+          last_activity: string | null
+          notes: string | null
+          probability: number | null
+          stage: Database["public"]["Enums"]["deal_stage"] | null
+          title: string
+          updated_at: string
+          user_id: string
+          value: number
+        }
+        Insert: {
+          client_id?: string | null
+          created_at?: string
+          days_in_stage?: number | null
+          expected_close?: string | null
+          id?: string
+          last_activity?: string | null
+          notes?: string | null
+          probability?: number | null
+          stage?: Database["public"]["Enums"]["deal_stage"] | null
+          title: string
+          updated_at?: string
+          user_id: string
+          value: number
+        }
+        Update: {
+          client_id?: string | null
+          created_at?: string
+          days_in_stage?: number | null
+          expected_close?: string | null
+          id?: string
+          last_activity?: string | null
+          notes?: string | null
+          probability?: number | null
+          stage?: Database["public"]["Enums"]["deal_stage"] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pipeline_deals_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          active_proposals: number | null
+          avatar_url: string | null
+          completed_jobs: number | null
+          created_at: string
+          description: string | null
+          hourly_rate: number | null
+          id: string
+          name: string
+          rating: number | null
+          response_time_hours: number | null
+          skills: string[] | null
+          specialization: string | null
+          status: Database["public"]["Enums"]["profile_status"] | null
+          total_earnings: number | null
+          updated_at: string
+          user_id: string
+          win_rate: number | null
+        }
+        Insert: {
+          active_proposals?: number | null
+          avatar_url?: string | null
+          completed_jobs?: number | null
+          created_at?: string
+          description?: string | null
+          hourly_rate?: number | null
+          id?: string
+          name: string
+          rating?: number | null
+          response_time_hours?: number | null
+          skills?: string[] | null
+          specialization?: string | null
+          status?: Database["public"]["Enums"]["profile_status"] | null
+          total_earnings?: number | null
+          updated_at?: string
+          user_id: string
+          win_rate?: number | null
+        }
+        Update: {
+          active_proposals?: number | null
+          avatar_url?: string | null
+          completed_jobs?: number | null
+          created_at?: string
+          description?: string | null
+          hourly_rate?: number | null
+          id?: string
+          name?: string
+          rating?: number | null
+          response_time_hours?: number | null
+          skills?: string[] | null
+          specialization?: string | null
+          status?: Database["public"]["Enums"]["profile_status"] | null
+          total_earnings?: number | null
+          updated_at?: string
+          user_id?: string
+          win_rate?: number | null
+        }
+        Relationships: []
+      }
+      project_milestones: {
+        Row: {
+          completed: boolean | null
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          project_id: string
+          title: string
+        }
+        Insert: {
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          project_id: string
+          title: string
+        }
+        Update: {
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          project_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          actual_hours: number | null
+          budget: number | null
+          client_id: string | null
+          created_at: string
+          description: string | null
+          end_date: string | null
+          estimated_hours: number | null
+          id: string
+          priority: Database["public"]["Enums"]["priority_level"] | null
+          progress: number | null
+          proposal_id: string | null
+          start_date: string | null
+          status: Database["public"]["Enums"]["project_status"] | null
+          team_members: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_hours?: number | null
+          budget?: number | null
+          client_id?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          estimated_hours?: number | null
+          id?: string
+          priority?: Database["public"]["Enums"]["priority_level"] | null
+          progress?: number | null
+          proposal_id?: string | null
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["project_status"] | null
+          team_members?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_hours?: number | null
+          budget?: number | null
+          client_id?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          estimated_hours?: number | null
+          id?: string
+          priority?: Database["public"]["Enums"]["priority_level"] | null
+          progress?: number | null
+          proposal_id?: string | null
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["project_status"] | null
+          team_members?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_proposal_id_fkey"
+            columns: ["proposal_id"]
+            isOneToOne: false
+            referencedRelation: "proposals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      proposals: {
+        Row: {
+          budget_max: number | null
+          budget_min: number | null
+          client_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          notes: string | null
+          response_deadline: string | null
+          skills: string[] | null
+          status: Database["public"]["Enums"]["proposal_status"] | null
+          submitted_at: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          win_probability: number | null
+        }
+        Insert: {
+          budget_max?: number | null
+          budget_min?: number | null
+          client_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          notes?: string | null
+          response_deadline?: string | null
+          skills?: string[] | null
+          status?: Database["public"]["Enums"]["proposal_status"] | null
+          submitted_at?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+          win_probability?: number | null
+        }
+        Update: {
+          budget_max?: number | null
+          budget_min?: number | null
+          client_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          notes?: string | null
+          response_deadline?: string | null
+          skills?: string[] | null
+          status?: Database["public"]["Enums"]["proposal_status"] | null
+          submitted_at?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          win_probability?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proposals_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      revenue_transactions: {
+        Row: {
+          amount: number
+          category: string | null
+          client_id: string | null
+          created_at: string
+          date: string
+          description: string | null
+          id: string
+          project_id: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          category?: string | null
+          client_id?: string | null
+          created_at?: string
+          date?: string
+          description?: string | null
+          id?: string
+          project_id?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          category?: string | null
+          client_id?: string | null
+          created_at?: string
+          date?: string
+          description?: string | null
+          id?: string
+          project_id?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "revenue_transactions_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "revenue_transactions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +427,28 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      deal_stage:
+        | "prospecting"
+        | "qualified"
+        | "proposal"
+        | "negotiation"
+        | "won"
+        | "lost"
+      priority_level: "low" | "medium" | "high" | "urgent"
+      profile_status: "active" | "paused" | "inactive"
+      project_status:
+        | "planning"
+        | "active"
+        | "on_hold"
+        | "completed"
+        | "cancelled"
+      proposal_status:
+        | "draft"
+        | "pending"
+        | "active"
+        | "won"
+        | "lost"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +575,32 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      deal_stage: [
+        "prospecting",
+        "qualified",
+        "proposal",
+        "negotiation",
+        "won",
+        "lost",
+      ],
+      priority_level: ["low", "medium", "high", "urgent"],
+      profile_status: ["active", "paused", "inactive"],
+      project_status: [
+        "planning",
+        "active",
+        "on_hold",
+        "completed",
+        "cancelled",
+      ],
+      proposal_status: [
+        "draft",
+        "pending",
+        "active",
+        "won",
+        "lost",
+        "cancelled",
+      ],
+    },
   },
 } as const
